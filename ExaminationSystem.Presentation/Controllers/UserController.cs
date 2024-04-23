@@ -40,12 +40,11 @@ namespace ExaminationSystem.Presentation.Controllers
                 var role = await _RoleManager.FindByIdAsync(UserDto.RoleName);
                 UserDto.RoleName = role.Name;
                 var response = await _Mediator.Send(UserDto);
-                if (response == "Created")
+                if (response.Succeeded)
                 {
                     return Redirect("/Home/Index");
 
                 }
-
             }
             return View(UserDto);
         }

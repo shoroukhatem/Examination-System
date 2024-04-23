@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using ExaminationSystem.Core.Bases;
+using MediatR;
 using Microsoft.AspNetCore.Mvc.Rendering;
 namespace ExaminationSystem.Core.Features.User.Commands.Models
 {
-    public class AddUserCommandDto : IRequest<string>
+    public class AddUserCommandDto : IRequest<Response<string>>
     {
         public string Email { get; set; }
         public string Name { get; set; }
