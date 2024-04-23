@@ -1,12 +1,14 @@
+using ExaminationSystem.Core;
+using ExaminationSystem.Infrastructure;
 using ExaminationSystem.Infrastructure.Context;
+using ExaminationSystem.Presentation.Helper;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace ExaminationSystem.Presentation
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +18,13 @@ namespace ExaminationSystem.Presentation
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-            var app = builder.Build();
+            #region Dependency Injection
 
+            builder.Services.AddCoreDependencies().AddRegistrationConfigration();
+            #endregion
+            var app = builder.Build();
+            //Appling Seeding
+            await ApplySeeding.ApplySeedingAsync(app);
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
