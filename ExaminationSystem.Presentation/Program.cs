@@ -2,6 +2,7 @@ using ExaminationSystem.Core;
 using ExaminationSystem.Infrastructure;
 using ExaminationSystem.Infrastructure.Context;
 using ExaminationSystem.Presentation.Helper;
+using ExaminationSystem.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Presentation
@@ -20,7 +21,7 @@ namespace ExaminationSystem.Presentation
             });
             #region Dependency Injection
 
-            builder.Services.AddCoreDependencies().AddRegistrationConfigration();
+            builder.Services.AddServiceDependencies().AddCoreDependencies().AddRegistrationConfigration(builder.Configuration);
             #endregion
             var app = builder.Build();
             //Appling Seeding
@@ -43,7 +44,7 @@ namespace ExaminationSystem.Presentation
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=User}/{action=SignIn}/{id?}");
 
             app.Run();
         }

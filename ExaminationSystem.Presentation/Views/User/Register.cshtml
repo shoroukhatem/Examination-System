@@ -2,6 +2,7 @@
 @model AddUserCommandDto
 @{
     Layout = null;
+   
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -28,35 +29,44 @@
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
                         <form method="POST" class="register-form" id="register-form" asp-controller="User" asp-action="Register">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <p class="text-danger"> =@ViewData["Error"]</p>
                             <div class="form-group">
                                 <label asp-for="@Model.Name" for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input asp-for="@Model.Name" type="text" name="name" id="name" placeholder="Your Name" />
+                                <input asp-for="@Model.Name" type="text" name="name" id="name" placeholder="Your Name" required=""/>
+                              
+                                <span asp-validation-for="@Model.Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="@Model.UserName" for="User Name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input asp-for="@Model.UserName" type="text" name="UserName" id="name" placeholder="Your User Name" />
+                                <input asp-for="@Model.UserName" type="text" name="UserName" id="name" placeholder="Your User Name" required="" />
+                                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="@Model.Email" for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input asp-for="@Model.Email" type="email" name="email" id="email" placeholder="Your Email" />
+                                <input asp-for="@Model.Email" type="email" name="email" id="email" placeholder="Your Email" required="" />
+                                <span asp-validation-for="@Model.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="@Model.Password" for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input asp-for="@Model.Password" type="password" name="password" id="pass" placeholder="Password" />
+                                <input asp-for="@Model.Password" type="password" name="password" id="pass" placeholder="Password" required="" />
+                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="confirmpassword" asp-for="@Model.ConfirmPassword"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input asp-for="@Model.ConfirmPassword" type="password" name="confirmpassword" id="re_pass" placeholder="Repeat your password" />
+                                <input asp-for="@Model.ConfirmPassword" type="password" name="confirmpassword" id="re_pass" placeholder="Repeat your password" required="" />
+                                <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                <label  for="Who You Are"></label> 
-                                <select asp-for="@Model.RoleName" asp-items="@Model.Roles">
+                                <select asp-for="@Model.RoleName" asp-items="@Model.Roles" required="">
                                     <option></option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input asp-for="@Model.IsAgree" type="checkbox" name="IsAgree" id="agree-term" class="agree-term" />
+                                <input asp-for="@Model.IsAgree" type="checkbox" name="IsAgree" id="agree-term" class="agree-term" required="" />
                                 <label asp-for ="@Model.IsAgree" for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                                <span asp-validation-for="@Model.IsAgree" class="text-danger"></span>
                             </div>
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
@@ -65,7 +75,7 @@
                     </div>
                     <div class="signup-image">
                         <figure><img src="\Images\Register&SignIn images\signup-image.jpg" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">I am already member</a>
+                        <a asp-action="SignIn" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ExaminationSystem.Service.Abstracts;
+using ExaminationSystem.Service.Implementation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ExaminationSystem.Service
 {
-    internal class ModuleServiceDependencies
+    public static class ModuleServiceDependencies
     {
+        public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
+        {
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            return services;
+        }
     }
 }
