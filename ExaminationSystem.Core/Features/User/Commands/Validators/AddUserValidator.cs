@@ -5,9 +5,7 @@ namespace ExaminationSystem.Core.Features.User.Commands.Validators
 {
     public class AddUserValidator : AbstractValidator<AddUserCommandDto>
     {
-        #region Fields
 
-        #endregion
         #region Constructors
         public AddUserValidator()
         {
