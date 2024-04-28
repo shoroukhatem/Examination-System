@@ -18,9 +18,17 @@ namespace ExaminationSystem.Presentation
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
             #region Dependency Injection
 
+<<<<<<< Updated upstream
             builder.Services.AddCoreDependencies().AddRegistrationConfigration();
+=======
+            builder.Services.AddServiceDependencies()
+                .AddCoreDependencies()
+                .AddInfrastructureDependencies()
+                .AddRegistrationConfigration(builder.Configuration);
+>>>>>>> Stashed changes
             #endregion
             var app = builder.Build();
             //Appling Seeding

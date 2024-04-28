@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ExaminationSystem.Infrastructure.Repository.Implementation;
+using ExaminationSystem.Infrastructure.Repository.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Store.Repository.Repositories;
 
 namespace ExaminationSystem.Infrastructure
 {
-    internal class ModuleInfrastructureDependencies
+    public static class ModuleInfrastructureDependencies
     {
+        public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services)
+        {
+            //services.AddScoped<IGenericRepository, GenericRepository<,>>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            return services;
+        }
     }
 }

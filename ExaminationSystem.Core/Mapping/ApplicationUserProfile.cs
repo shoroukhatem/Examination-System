@@ -2,7 +2,7 @@
 using ExaminationSystem.Core.Features.User.Commands.Models;
 using ExaminationSystem.Domain.Entities;
 
-namespace ExaminationSystem.Core.Mapping.User
+namespace ExaminationSystem.Core.Mapping
 {
     public class ApplicationUserProfile : Profile
     {

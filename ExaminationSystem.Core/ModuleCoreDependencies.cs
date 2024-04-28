@@ -1,5 +1,5 @@
 ﻿using ExaminationSystem.Core.Behaviors;
-using ExaminationSystem.Core.Mapping.User;
+using ExaminationSystem.Core.Mapping;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +17,7 @@ namespace ExaminationSystem.Core
             //configuration of AutoMapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(typeof(ApplicationUserProfile));
+            services.AddAutoMapper(typeof(SubjectProfile));
 
             //Get Validators
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

@@ -1,4 +1,12 @@
+<<<<<<< Updated upstream
 ﻿<!DOCTYPE html>
+=======
+﻿@using ExaminationSystem.Domain.Entities
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager;
+<!DOCTYPE html>
+>>>>>>> Stashed changes
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +33,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Teacher"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Subject" asp-action="Index" asp-route-TeacherId="@userManager.GetUserId(User)">Subjects</a>
+                            </li>
+                        } 
                     </ul>
                 </div>
             </div>

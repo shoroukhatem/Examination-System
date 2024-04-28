@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExaminationSystem.Domain.Entities
 {
-    public class SubjectTeacher
+    public class SubjectTeacher : BaseEntity<KeyValuePair<int, string>>
     {
         public Subject Subject { get; set; }
         [ForeignKey("Subject")]
