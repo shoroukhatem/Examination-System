@@ -2,6 +2,7 @@ using ExaminationSystem.Core;
 using ExaminationSystem.Infrastructure;
 using ExaminationSystem.Infrastructure.Context;
 using ExaminationSystem.Presentation.Helper;
+using ExaminationSystem.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Presentation
@@ -21,6 +22,7 @@ namespace ExaminationSystem.Presentation
 
             #region Dependency Injection
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             builder.Services.AddCoreDependencies().AddRegistrationConfigration();
 =======
@@ -29,6 +31,9 @@ namespace ExaminationSystem.Presentation
                 .AddInfrastructureDependencies()
                 .AddRegistrationConfigration(builder.Configuration);
 >>>>>>> Stashed changes
+=======
+            builder.Services.AddServiceDependencies().AddCoreDependencies().AddRegistrationConfigration(builder.Configuration);
+>>>>>>> b9f51f04124c0a547b06717ea4f44c4be383cfd1
             #endregion
             var app = builder.Build();
             //Appling Seeding
@@ -51,7 +56,7 @@ namespace ExaminationSystem.Presentation
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=User}/{action=SignIn}/{id?}");
 
             app.Run();
         }

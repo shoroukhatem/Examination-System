@@ -1,9 +1,11 @@
 ﻿using ExaminationSystem.Presentation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace ExaminationSystem.Presentation.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,8 +15,9 @@ namespace ExaminationSystem.Presentation.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? token)
         {
+            // return Ok(token);
             return View();
         }
 

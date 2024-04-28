@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ExaminationSystem.Service.Abstracts;
+using ExaminationSystem.Service.Implementation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ExaminationSystem.Service
 {
-    internal class ModuleServiceDependencies
+    public static class ModuleServiceDependencies
     {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
@@ -17,5 +16,12 @@ namespace ExaminationSystem.Service
             return services;
         }
 >>>>>>> Stashed changes
+=======
+        public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
+        {
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            return services;
+        }
+>>>>>>> b9f51f04124c0a547b06717ea4f44c4be383cfd1
     }
 }
