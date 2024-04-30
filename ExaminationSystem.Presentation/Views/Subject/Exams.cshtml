@@ -1,0 +1,33 @@
+﻿@using ExaminationSystem.Core.Features.Exams.Queries.Dtos
+@model IReadOnlyList<GetExamHeadLinesDto>
+@{
+    ViewData["Title"] = "Exams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exams</title>
+    <link rel="stylesheet" href="/css/Subject/ExamDetails.css">
+</head>
+<body>
+<h1>Exams</h1>
+    <a asp-controller="Exams" asp-action="Create" asp-route-SubjectId="@TempData["SubjectId"]" asp-route-TeacherId="@TempData["TeacherId"]" class="btn btn-primary">Create New Exam</a>
+    @foreach (var item in Model)
+    {   
+    <div class="card">
+        <h2>Exam Name: @item.Name</h2>
+        <p>Start Time: @item.StartTime</p>
+        <p>End Time: @item.EndTime</p>
+        <p>Duration:@item.Duration</p>
+        <p>Full Mark: @item.FullMark</p>
+    </div>
+    }
+    
+</body>
+</html>
+
+

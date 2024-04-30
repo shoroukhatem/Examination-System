@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExaminationSystem
+﻿namespace ExaminationSystem
 {
-   
+
     public class TOrF : Question
     {
-        
+        public List<string> Answers = new List<string> { "True", "False" };
     }
 }

@@ -23,8 +23,6 @@ namespace ExaminationSystem.Core.Features.Subject.Queries.Handler
         }
         #endregion
         #region Handlers
-
-        #endregion
         //Get All Subjects For Teacher
         public async Task<Response<IReadOnlyList<GetSubjectDto>>> Handle(GetAllSubjectsForTeacherQuery request, CancellationToken cancellationToken)
         {
@@ -33,5 +31,6 @@ namespace ExaminationSystem.Core.Features.Subject.Queries.Handler
             var MappedSubjectsList = _Mapper.Map<IReadOnlyList<GetSubjectDto>>(SubjectsList);
             return Success(MappedSubjectsList);
         }
+        #endregion
     }
 }

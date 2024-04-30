@@ -21,19 +21,8 @@ namespace ExaminationSystem.Presentation
             });
 
             #region Dependency Injection
+            builder.Services.AddInfrastructureDependencies().AddServiceDependencies().AddCoreDependencies().AddRegistrationConfigration(builder.Configuration);
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-            builder.Services.AddCoreDependencies().AddRegistrationConfigration();
-=======
-            builder.Services.AddServiceDependencies()
-                .AddCoreDependencies()
-                .AddInfrastructureDependencies()
-                .AddRegistrationConfigration(builder.Configuration);
->>>>>>> Stashed changes
-=======
-            builder.Services.AddServiceDependencies().AddCoreDependencies().AddRegistrationConfigration(builder.Configuration);
->>>>>>> b9f51f04124c0a547b06717ea4f44c4be383cfd1
             #endregion
             var app = builder.Build();
             //Appling Seeding

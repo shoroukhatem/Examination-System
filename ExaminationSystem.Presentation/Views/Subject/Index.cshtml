@@ -1,5 +1,7 @@
 ﻿@using ExaminationSystem.Core.Features.Subject.Queries.Dtos
-
+@using ExaminationSystem.Domain.Entities
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> userManager
 @model IReadOnlyList<GetSubjectDto>
 
 @{
@@ -22,7 +24,7 @@
             <tr>
                 <th>@Html.DisplayNameFor(x => x[0].Code) </th>
                 <th>@Html.DisplayNameFor(x => x[0].Name) </th>
-                <th>Details</th>
+                <th>Exams</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -35,8 +37,8 @@
                     <td>@item.Name</td>
                   
                     <td>
-                        <a class="btn btn-success" asp-controller="Subject" asp-action="Details" asp-route-id="@item.Id">
-                            <i class="fas fa-eye"></i> Details
+                        <a class="btn btn-success" asp-controller="Subject" asp-action="Exams" asp-route-SubjectId="@item.Id" asp-route-TeacherId="@userManager.GetUserId(User)">
+                            <i class="fas fa-eye"></i> Exams
                         </a>
                     </td>
                     <td>

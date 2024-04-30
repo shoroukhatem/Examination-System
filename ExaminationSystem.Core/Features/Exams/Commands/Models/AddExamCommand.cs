@@ -1,13 +1,11 @@
-﻿using ExaminationSystem.Domain.Entities;
+﻿using ExaminationSystem.Core.Bases;
+using MediatR;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ExaminationSystem
+namespace ExaminationSystem.Core.Features.Exams.Commands.Models
 {
-    public class Exam : BaseEntity<int>
+    public class AddExamCommand : IRequest<Response<string>>
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -20,12 +18,10 @@ namespace ExaminationSystem
         public int NumberOfQuestions { get; set; }
         [Required]
         public int FullMark { get; set; }
-        public List<Question> Questions { get; set; } = new List<Question>();
+        // public List<Question> Questions { get; set; } = new List<Question>();
         public int SubjectId { get; set; }
-        public ApplicationUser Teacher { get; set; }
-        [ForeignKey("Teacher")]
+        /* public ApplicationUser Teacher { get; set; }
+         [ForeignKey("Teacher")]*/
         public string TeacherId { get; set; }
-
-
     }
 }

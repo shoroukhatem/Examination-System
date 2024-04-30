@@ -1,6 +1,7 @@
 ﻿using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Infrastructure.Context;
 using ExaminationSystem.Infrastructure.Repository.Interfaces;
+using ExaminationSystem.Infrastructure.Specification;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Infrastructure.Repository.Implementation
@@ -23,19 +24,33 @@ namespace ExaminationSystem.Infrastructure.Repository.Implementation
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            _Context.Set<TEntity>().Remove(entity);
         }
 
         public async Task<IReadOnlyList<TEntity>> GetAllAsync() => await _Context.Set<TEntity>().ToListAsync();
 
-        public Task<TEntity> GetByIdAsync(Tkey? id)
+        public async Task<IReadOnlyList<TEntity>> GetAllWithSpecificationAsync(ISpecification<TEntity> specs)
         {
-            throw new NotImplementedException();
+            return await ApplySpecification(specs).ToListAsync();
+        }
+
+        public async Task<TEntity> GetByIdAsync(Tkey? id)
+        {
+            return await _Context.Set<TEntity>().FindAsync(id);
+        }
+
+        public async Task<TEntity> GetByIdWithSpecificationAsync(ISpecification<TEntity> specs)
+        {
+            return await ApplySpecification(specs).FirstOrDefaultAsync();
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _Context.Set<TEntity>().Update(entity);
+        }
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specs)
+        {
+            return SpecificationEvaluator<TEntity, Tkey>.GetQuery(_Context.Set<TEntity>(), specs);
         }
         #endregion
     }

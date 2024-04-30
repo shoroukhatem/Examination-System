@@ -1,4 +1,5 @@
-﻿using ExaminationSystem.Core.Features.Subject.Commands.Models;
+﻿using ExaminationSystem.Core.Features.Exams.Queries.Models;
+using ExaminationSystem.Core.Features.Subject.Commands.Models;
 using ExaminationSystem.Core.Features.Subject.Queries.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -45,5 +46,14 @@ namespace ExaminationSystem.Presentation.Controllers
             }
             return View(subject);
         }
+        [Authorize(Roles = "Teacher")]
+        public IActionResult Exams(int SubjectId, string TeacherId)
+        {
+            var response = _Mediator.Send(new GetAllExamsDetailsForEachSubjectQuery { SubjectId = SubjectId });
+            TempData["TeacherId"] = TeacherId;
+            TempData["SubjectId"] = SubjectId;
+            return View(response.Result.Data);
+        }
+
     }
 }
