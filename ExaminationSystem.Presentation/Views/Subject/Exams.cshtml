@@ -19,11 +19,12 @@
     @foreach (var item in Model)
     {   
     <div class="card">
-        <h2>Exam Name: @item.Name</h2>
+         <a asp-action="ExamPaper" asp-controller="Exams" asp-route-ExamId="@item.Id">Exam Name: @item.Name</a>
         <p>Start Time: @item.StartTime</p>
         <p>End Time: @item.EndTime</p>
         <p>Duration:@item.Duration</p>
         <p>Full Mark: @item.FullMark</p>
+       
     </div>
     }
     

@@ -19,6 +19,8 @@ namespace ExaminationSystem.Core
             services.AddAutoMapper(typeof(ApplicationUserProfile));
             services.AddAutoMapper(typeof(SubjectProfile));
             services.AddAutoMapper(typeof(ExamProfile));
+            services.AddAutoMapper(typeof(QuestionProfile));
+            services.AddAutoMapper(typeof(AnswerProfile));
 
             //Get Validators
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

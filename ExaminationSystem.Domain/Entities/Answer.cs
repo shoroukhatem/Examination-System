@@ -9,7 +9,7 @@ namespace ExaminationSystem
         public string AnswerText { get; set; }
         public Question Question { get; set; }
         [ForeignKey("Question")]
-        public int QuestionId { get; set; }
+        public int? QuestionId { get; set; }
 
     }
 }

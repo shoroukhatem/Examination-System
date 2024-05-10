@@ -7,8 +7,9 @@ using MediatR;
 
 namespace ExaminationSystem.Core.Features.Exams.Queries.Handler
 {
-    public class ExamQueryHandler : ResponseHandler,
-                                       IRequestHandler<GetAllExamsDetailsForEachSubjectQuery, Response<IReadOnlyList<GetExamHeadLinesDto>>>
+    public class ExamQueryHandler : ResponseHandler
+                                    , IRequestHandler<GetAllExamsDetailsForEachSubjectQuery, Response<IReadOnlyList<GetExamHeadLinesDto>>>
+                                    , IRequestHandler<GetExamQuery, Response<GetExamDto>>
     {
         #region Fields
         private readonly IMapper _Mapper;
@@ -31,6 +32,18 @@ namespace ExaminationSystem.Core.Features.Exams.Queries.Handler
             var MappedExamList = _Mapper.Map<IReadOnlyList<GetExamHeadLinesDto>>(ExamList);
             return Success(MappedExamList);
         }
+        //Get Exam By Id
+        public async Task<Response<GetExamDto>> Handle(GetExamQuery request, CancellationToken cancellationToken)
+        {
+            var exam = await _ExamService.GetExamByIdAsync(request.ExamId);
+            if (exam == null)
+            {
+                return BadRequest<GetExamDto>("Exam Is Not Exist");
+            }
+            var ExamDto = _Mapper.Map<GetExamDto>(exam);
+            return Success(ExamDto);
+        }
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using ExaminationSystem.Infrastructure.Seeder;
+﻿using ExaminationSystem.Infrastructure.Context;
+using ExaminationSystem.Infrastructure.Seeder;
 using Microsoft.AspNetCore.Identity;
 
 namespace ExaminationSystem.Presentation.Helper
@@ -12,9 +13,11 @@ namespace ExaminationSystem.Presentation.Helper
                 var services = scope.ServiceProvider;
                 var loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                var context = services.GetRequiredService<ExamSystemDbContext>();
                 try
                 {
                     await RoleSeeder.SeedAsync(roleManager, loggerFactory);
+                    await AnswersSeeder.SeedAsync(context, loggerFactory);
 
                 }
                 catch (Exception ex)

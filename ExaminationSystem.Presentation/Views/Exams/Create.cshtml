@@ -1,12 +1,11 @@
 ﻿@using ExaminationSystem.Core.Features.Exams.Commands.Models
 
 @model AddExamCommand
-
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    TempData["TeacherId"] = @Model.TeacherId;
-    TempData["SubjectId"] = @Model.SubjectId;
+   /* TempData["TeacherId"] = @Model.TeacherId;
+    TempData["SubjectId"] = @Model.SubjectId;*/
 }
 
 <h1>Create</h1>
@@ -43,7 +42,8 @@
         <input type="number" asp-for="@Model.FullMark" class="form-control" id="validationDefault02" required>
         <span asp-validation-for="@Model.FullMark" class="text-danger"></span>
     </div>
-    <input type="hidden" for="" "@Model.FullMark" class="form-control" id="validationDefault02" required>
+    <input type="hidden" asp-for="@Model.SubjectId" value="@Model.SubjectId" class="form-control" id="validationDefault02" required>
+    <input type="hidden" asp-for="@Model.TeacherId" value="@Model.TeacherId" class="form-control" id="validationDefault02" required>
     <div class="col-12">
         <button class="btn btn-primary" type="submit">Create</button>
         <a asp-controller="Subject" asp-action="Exams" class="btn btn-light"> Back To List</a>

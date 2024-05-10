@@ -7,15 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ExaminationSystem.Presentation.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
-        private readonly IMediator _Mediator;
+
         private readonly RoleManager<IdentityRole> _RoleManager;
         private readonly SignInManager<ApplicationUser> _SignInManager;
 
-        public UserController(IMediator mediator, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
+        public UserController(IMediator mediator, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager) : base(mediator)
         {
-            _Mediator = mediator;
             _RoleManager = roleManager;
             _SignInManager = signInManager;
         }

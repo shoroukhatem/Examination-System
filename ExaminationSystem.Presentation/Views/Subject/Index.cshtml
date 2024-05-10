@@ -36,9 +36,10 @@
                     <td>@item.Code</td>
                     <td>@item.Name</td>
                   
+
                     <td>
-                        <a class="btn btn-success" asp-controller="Subject" asp-action="Exams" asp-route-SubjectId="@item.Id" asp-route-TeacherId="@userManager.GetUserId(User)">
-                            <i class="fas fa-eye"></i> Exams
+                        <a class="btn btn-warning" asp-controller="Subject" asp-action="Exams" asp-route-SubjectId="@item.Id" asp-route-TeacherId="@userManager.GetUserId(User)">
+                            <i class="fas fa-edit"></i> Exams
                         </a>
                     </td>
                     <td>

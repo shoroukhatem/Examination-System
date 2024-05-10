@@ -48,4 +48,8 @@
     <ProjectReference Include="..\ExaminationSystem.Core\ExaminationSystem.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Answers\" />
+  </ItemGroup>
+
 </Project>

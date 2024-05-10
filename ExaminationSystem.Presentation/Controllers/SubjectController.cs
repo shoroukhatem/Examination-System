@@ -7,14 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExaminationSystem.Presentation.Controllers
 {
-    public class SubjectController : Controller
+    public class SubjectController : BaseController
     {
-        private readonly IMediator _Mediator;
-
-        public SubjectController(IMediator mediator)
+        public SubjectController(IMediator mediator) : base(mediator)
         {
-            _Mediator = mediator;
         }
+
         [Authorize(Roles = "Teacher")]
         [Route("/TeacherSubjects")]
         //Get All Subjects For Teacher
@@ -31,7 +29,7 @@ namespace ExaminationSystem.Presentation.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult AddSubject()
         {
-            TempData["TeacherId"] = "123";
+            //TempData["TeacherId"] = "123";
             return View(new AddSubjectCommand());
         }
         [Authorize(Roles = "Teacher")]
@@ -47,7 +45,7 @@ namespace ExaminationSystem.Presentation.Controllers
             return View(subject);
         }
         [Authorize(Roles = "Teacher")]
-        public IActionResult Exams(int SubjectId, string TeacherId)
+        public IActionResult Exams(int SubjectId, string? TeacherId)
         {
             var response = _Mediator.Send(new GetAllExamsDetailsForEachSubjectQuery { SubjectId = SubjectId });
             TempData["TeacherId"] = TeacherId;

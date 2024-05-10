@@ -1,0 +1,61 @@
+﻿@using ExaminationSystem.Core.Features.Questions.Commands.Models
+@model AddQuestionCommand
+@{
+    ViewData["Title"] = "CreateMCQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="row g-3" asp-action="Create" asp-controller="Question">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="col-md-4">
+
+    <input type="hidden" asp-for="@Model.ExamId" value="@ViewData["ExamId"]" class="form-control" id="ExamId" required>
+         <input type="hidden" asp-for="@Model.QuestionType" value="@Model.QuestionType" class="form-control" id="QuestionType" required>
+</div>
+<div class="col-md-4">
+    <label asp-for="@Model.Header" for="Header" class="form-label">Header</label>
+    <input type="text" asp-for="@Model.Header" class="form-control" id="Header" required>
+    <span asp-validation-for="@Model.Header" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="@Model.Body" for="Body" class="form-label">Body</label>
+    <input type="text" asp-for="@Model.Body" class="form-control" id="Body" required>
+    <span asp-validation-for="@Model.Body" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="@Model.Mark" for="Mark" class="form-label">Mark</label>
+    <input type="number" asp-for="@Model.Mark" class="form-control" id="Mark" max="1000" step="0.01" required>
+    <span asp-validation-for="@Model.Mark" class="text-danger"></span>
+</div>
+
+
+      @for(int i=0;i<4;i++)
+    {
+    <div class="col-md-4">
+        <label asp-for="@Model.AnswersAndCorrect.Answers[i].AnswerText" for="AnswerText" class="form-label">Answer</label>
+        <input type="text" asp-for="@Model.AnswersAndCorrect.Answers[i].AnswerText" class="form-control" id="AnswerText" required>
+        <span asp-validation-for="@Model.AnswersAndCorrect.Answers[i].AnswerText" class="text-danger"></span>
+    </div>
+    }
+    <div class="col-md-4">
+        <label asp-for="@Model.AnswersAndCorrect.TrueAnswer" for="TrueAnswer" class="form-label">Correct Answer</label>
+    <select asp-for="@Model.AnswersAndCorrect.TrueAnswer" id="TrueAnswer">
+            <option value="1">First Answer</option>
+            <option value="2">Second Answer</option>
+            <option value="3">Third Answer</option>
+            <option value="4">Fourth Answer</option>
+        </select>
+    <span asp-validation-for="@Model.AnswersAndCorrect.TrueAnswer" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Add</button>
+        <a asp-action="Index" class="btn btn-light"> Back To List</a>
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

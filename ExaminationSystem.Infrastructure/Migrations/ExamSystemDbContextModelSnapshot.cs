@@ -34,13 +34,12 @@ namespace ExaminationSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuestionId")
+                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("AnswerId");
 
-                    b.HasIndex("QuestionId")
-                        .IsUnique();
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Answers");
                 });
@@ -228,9 +227,16 @@ namespace ExaminationSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TrueAnswer")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ExamId");
+
+                    b.HasIndex("TrueAnswer")
+                        .IsUnique()
+                        .HasFilter("[TrueAnswer] IS NOT NULL");
 
                     b.ToTable("Questions");
 
@@ -415,18 +421,7 @@ namespace ExaminationSystem.Infrastructure.Migrations
                 {
                     b.HasOne("ExaminationSystem.MCQ", null)
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExaminationSystem.Question", "Question")
-                        .WithOne("TrueAnswer")
-                        .HasForeignKey("ExaminationSystem.Answer", "QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Answers_Questions_QuestionId1");
-
-                    b.Navigation("Question");
+                        .HasForeignKey("QuestionId");
                 });
 
             modelBuilder.Entity("ExaminationSystem.Domain.Entities.ExamStudent", b =>
@@ -510,6 +505,12 @@ namespace ExaminationSystem.Infrastructure.Migrations
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ExaminationSystem.Answer", "Correct")
+                        .WithOne("Question")
+                        .HasForeignKey("ExaminationSystem.Question", "TrueAnswer");
+
+                    b.Navigation("Correct");
                 });
 
             modelBuilder.Entity("ExaminationSystem.Subject", b =>
@@ -574,15 +575,15 @@ namespace ExaminationSystem.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ExaminationSystem.Answer", b =>
+                {
+                    b.Navigation("Question")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ExaminationSystem.Exam", b =>
                 {
                     b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("ExaminationSystem.Question", b =>
-                {
-                    b.Navigation("TrueAnswer")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ExaminationSystem.Subject", b =>
